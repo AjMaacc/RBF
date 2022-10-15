@@ -1,0 +1,8 @@
+name: ContactFlag
+version: '${project.version}'
+main: me.ajmac.contactflag.ContactFlag
+api-version: 1.19
+depend: [WorldGuard]
+authors: [AjMac]
+description: WorldGuard flag to prevent sweet berry bush damage
+website: https://ajmaacc.com
