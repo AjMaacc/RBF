@@ -1,6 +1,5 @@
 package me.ajmac.contactflag;
 
-import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldguard.LocalPlayer;
@@ -10,7 +9,6 @@ import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
-import com.sk89q.worldguard.protection.regions.RegionQuery;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -22,7 +20,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
 
-public final class ContactFlag extends JavaPlugin implements Listener {
+public final class RBF extends JavaPlugin implements Listener {
 
     public static StateFlag CONTACT_DAMAGE;
     WorldGuardPlugin worldguard;
@@ -58,7 +56,7 @@ public final class ContactFlag extends JavaPlugin implements Listener {
             RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
             ApplicableRegionSet set = container.get(new BukkitWorld(location.getWorld())).getApplicableRegions(BlockVector3.at(location.getX(),location.getY(),location.getZ()));
 
-            if (e.getDamager().getType().equals(Material.SWEET_BERRY_BUSH) && !(set.testState(localPlayer, ContactFlag.CONTACT_DAMAGE)))
+            if (e.getDamager().getType().equals(Material.SWEET_BERRY_BUSH) && !(set.testState(localPlayer, RBF.CONTACT_DAMAGE)))
                 e.setCancelled(true);
         }
     }

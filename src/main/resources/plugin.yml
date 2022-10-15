@@ -1,6 +1,6 @@
-name: ContactFlag
+name: RBF
 version: '${project.version}'
-main: me.ajmac.contactflag.ContactFlag
+main: me.ajmac.contactflag.RBF
 api-version: 1.19
 depend: [WorldGuard]
 authors: [AjMac]
