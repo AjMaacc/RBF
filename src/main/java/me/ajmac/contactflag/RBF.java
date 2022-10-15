@@ -22,7 +22,7 @@ import java.util.logging.Level;
 
 public final class RBF extends JavaPlugin implements Listener {
 
-    public static StateFlag CONTACT_DAMAGE;
+    StateFlag CONTACT_DAMAGE;
     WorldGuardPlugin worldguard;
 
     public void onEnable() {
@@ -38,7 +38,6 @@ public final class RBF extends JavaPlugin implements Listener {
     public void onDisable() {
         // Plugin shutdown logic
     }
-
     @Override
     public void onLoad() {
         WorldGuard worldGuard = WorldGuard.getInstance();
@@ -52,11 +51,11 @@ public final class RBF extends JavaPlugin implements Listener {
 
         if (e.getEntity() instanceof Player){
             LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer((Player) e.getEntity());
-            Location location = e.getEntity().getLocation();
+            Location l = e.getEntity().getLocation();
             RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
-            ApplicableRegionSet set = container.get(new BukkitWorld(location.getWorld())).getApplicableRegions(BlockVector3.at(location.getX(),location.getY(),location.getZ()));
+            ApplicableRegionSet set = container.get(new BukkitWorld(l.getWorld())).getApplicableRegions(BlockVector3.at(l.getX(),l.getY(),l.getZ()));
 
-            if (e.getDamager().getType().equals(Material.SWEET_BERRY_BUSH) && !(set.testState(localPlayer, RBF.CONTACT_DAMAGE)))
+            if (e.getDamager().getType().equals(Material.SWEET_BERRY_BUSH) && !(set.testState(localPlayer, CONTACT_DAMAGE)))
                 e.setCancelled(true);
         }
     }
