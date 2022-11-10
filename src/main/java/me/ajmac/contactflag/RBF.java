@@ -49,15 +49,16 @@ public final class RBF extends JavaPlugin implements Listener {
     @EventHandler
     public void onContactDamage(EntityDamageByBlockEvent e) {
 
-        if (e.getEntity() instanceof Player){
+        if (e.getEntity() instanceof Player) {
             LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer((Player) e.getEntity());
             Location l = e.getEntity().getLocation();
             RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
-            ApplicableRegionSet set = container.get(new BukkitWorld(l.getWorld())).getApplicableRegions(BlockVector3.at(l.getX(),l.getY(),l.getZ()));
+            ApplicableRegionSet set = container.get(new BukkitWorld(l.getWorld())).getApplicableRegions(BlockVector3.at(l.getX(), l.getY(), l.getZ()));
 
-            if (e.getDamager().getType().equals(Material.SWEET_BERRY_BUSH) && !(set.testState(localPlayer, CONTACT_DAMAGE)))
-                e.setCancelled(true);
+            if (e.getDamager() != null) {
+                if (e.getDamager().getType().equals(Material.SWEET_BERRY_BUSH) && !(set.testState(localPlayer, CONTACT_DAMAGE)))
+                    e.setCancelled(true);
+            }
         }
     }
-
 }
